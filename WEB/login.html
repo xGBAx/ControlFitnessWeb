@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ControlFitness - Login</title>
+    <link rel="stylesheet" href="login.css">
+    
+    <!-- PWA / iOS Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ControlFitness">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <h1>Entrar</h1>
+        <p>Acesse seu diário de treinos</p>
+        
+        <form id="formLogin">
+            <div class="input-group">
+                <label for="emailLogin">E-mail</label>
+                <input type="email" id="emailLogin" placeholder="Seu e-mail" required>
+            </div>
+            <div class="input-group">
+                <label for="senhaLogin">Senha</label>
+                <input type="password" id="senhaLogin" placeholder="Sua senha" required>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+
+        <!-- Botão Novo do Google -->
+        <button id="btnGoogle" class="btn btn-secondary" style="margin-top: 10px; background-color: #fff; color: #000; width: 100%;">
+            🌐 Entrar com o Google
+        </button>
+
+        <div class="links-rodape">
+            <p>Não tem uma conta? <a href="cadastro.html" class="link-destaque">Cadastre-se</a></p>
+            <a href="index.html" class="link-voltar">⬅ Voltar ao Início</a>
+        </div>
+    </div>
+
+    <!-- Aviso Customizado para Usuários de iOS -->
+    <div id="ios-prompt" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: #fff; color: #333; padding: 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 9999; text-align: center; font-family: sans-serif;">
+        <p style="margin: 0 0 10px 0; font-size: 15px; font-weight: bold;">Instale o ControlFitness</p>
+        <p style="margin: 0 0 15px 0; font-size: 14px; color: #555;">Toque no ícone de Compartilhar <b style="font-size: 18px;">⍗</b> na barra inferior do Safari e escolha <strong>"Adicionar à Tela de Início"</strong>.</p>
+        <button onclick="document.getElementById('ios-prompt').style.display='none'" style="background: none; border: none; color: #f44336; font-weight: bold; font-size: 14px; cursor: pointer;">Entendi, fechar</button>
+    </div>
+
+    <script type="module" src="login.js"></script>
+
+    <!-- Lógica para detectar iOS e exibir o aviso -->
+    <script>
+        const isIos = () => {
+          const userAgent = window.navigator.userAgent.toLowerCase();
+          return /iphone|ipad|ipod/.test(userAgent);
+        };
+        // Checa se já está rodando como app instalado
+        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+        // Se for iOS e estiver no Safari normal (não instalado), exibe o aviso
+        if (isIos() && !isInStandaloneMode()) {
+            document.getElementById('ios-prompt').style.display = 'block';
+        }
+    </script>
+    
+    <!-- Registro do Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registrado!', reg.scope))
+                    .catch(err => console.error('Erro no SW', err));
+            });
+        }
+    </script>
+</body>
+</html>
