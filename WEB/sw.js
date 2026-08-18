@@ -1,21 +1,21 @@
 const CACHE_NAME = 'controlfitness-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/login.html',
-    '/cadastro.html',
-    '/registro.html',
-    '/historico.html',
-    '/index.css',
-    '/login.css',
-    '/registro.css',
-    '/historico.css',
-    '/firebase-config.js',
-    '/login.js',
-    '/cadastro.js',
-    '/registro.js',
-    '/historico.js',
-    '/manifest.json'
+    './',
+    './index.html',
+    './login.html',
+    './cadastro.html',
+    './registro.html',
+    './historico.html',
+    './index.css',
+    './login.css',
+    './registro.css',
+    './historico.css',
+    './firebase-config.js',
+    './login.js',
+    './cadastro.js',
+    './registro.js',
+    './historico.js',
+    './manifest.json'
 ];
 
 self.addEventListener('install', event => {
